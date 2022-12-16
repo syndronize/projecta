@@ -23,7 +23,7 @@
                     <div id=""></div>
                 </div>
                 <div class="widget-data">
-                    <div class="h4 mb-0">2020</div>
+                    <div class="h4 mb-0">{{$member->count}}</div>
                     <div class="weight-600 font-14">Member</div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <div id=""></div>
                 </div>
                 <div class="widget-data">
-                    <div class="h4 mb-0">400</div>
+                    <div class="h4 mb-0">{{$barang->count}}</div>
                     <div class="weight-600 font-14">Total Barang</div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     <div id=""></div>
                 </div>
                 <div class="widget-data">
-                    <div class="h4 mb-0">350 Hari</div>
+                    <div class="h4 mb-0">{{$sewa->count}} Hari</div>
                     <div class="weight-600 font-14">Total Sewa</div>
                 </div>
             </div>
@@ -70,17 +70,18 @@
         <thead>
             <tr>
                 <th scope="col">No.</th>
-                <th scope="col">Nama</th>
+                <th scope="col">Nama Barang</th>
                 <th scope="col">Hasil Akhir</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
+        @foreach ($penilaian as $no=>$penilaian )
+            <tr align="center">
+                <th>{{$no+1}}</th>
+                <td>{{$penilaian->nama}}</td>
+                <td>{{$penilaian->nilai_akhir}}</td>
             </tr>
-            
+            @endforeach
         </tbody>
     </table>
 @endsection

@@ -155,6 +155,7 @@
 							<span class="micon dw dw-home"></span><span class="mtext">Home</span>
 						</a>
 					</li>
+					@if(Session()->get('role') == 'admin')
 					<li>
 						<a href="{{route('member')}}" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-user-12"></span><span class="mtext">Data Member</span>
@@ -165,16 +166,18 @@
 							<span class="micon dw dw-box"></span><span class="mtext">Data Barang</span>
 						</a>
 					</li>
+					@endif
 					<li>
 						<a href="{{route('sewa')}}" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-shopping-cart"></span><span class="mtext">Data Sewa</span>
 						</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="{{route('penilaian')}}" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-analytics-3"></span><span class="mtext">Data Penilaian</span>
 						</a>
-					</li>
+					</li> -->
+
 					
 					
 				</ul>

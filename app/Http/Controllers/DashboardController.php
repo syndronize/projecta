@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
 
     public function dashboard(){
-        $data = DB::table('penilaian')
+        $data['penilaian'] = DB::table('penilaian')
         ->selectRaw('penilaian.*,barang.nama')
         ->leftJoin('user','user.user_id','=','penilaian.user_id')
         ->leftJoin('barang','barang.id','=','penilaian.barang_id')
@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $maxc2=DB::table('penilaian')->max('kualitas');
         $maxc3=DB::table('penilaian')->max('pelayanan');
         // dd($minc2);
-        foreach ($data as $no => $row) {
+        foreach ($data['penilaian'] as $no => $row) {
             //Pembobotan
             $bobotc1 = 0.3;
             $bobotc2 = 0.3;
@@ -32,9 +32,9 @@ class DashboardController extends Controller
 
 
             //Penilaian 1
-            $nilaic1 = ($row->peforma != null ? $maxc1/$row->peforma : 0);
-            $nilaic2 = ($row->kualitas != null ? $maxc2/$row->kualitas : 0);
-            $nilaic3 = ($row->pelayanan != null ? $maxc2/$row->pelayanan : 0);
+            $nilaic1 = ($row->peforma != null ? $row->peforma/$maxc1 : 0);
+            $nilaic2 = ($row->kualitas != null ? $row->kualitas/$maxc2 : 0);
+            $nilaic3 = ($row->pelayanan != null ? $row->pelayanan/$maxc3 : 0);
 
             //Penilaian Akhir
             $nilaiakhir=($nilaic1*$bobotc1)+($nilaic2*$bobotc2)+($nilaic3*$bobotc3);
@@ -44,7 +44,16 @@ class DashboardController extends Controller
                 'nilai_akhir' =>$nilaiakhir
             ]);
         }
-        return view('dashboard',compact('data'));
+        $data['member'] = DB::table('user')
+        ->selectRaw('COUNT(user_id) as count')
+        ->first();
+        $data['sewa'] = DB::table('sewa')
+        ->selectRaw('SUM(lama_sewa) as count')
+        ->first();
+        $data['barang'] = DB::table('barang')
+        ->selectRaw('COUNT(id) as count')
+        ->first();
+        return view('dashboard',$data);
     }
     public function login(){
         return view('auth/login');
