@@ -1,5 +1,10 @@
 @extends('template')
 @section('title','Data Barang')
+@section('style')
+<link rel="stylesheet" type="text/css" href="{{('/')}}deskapp/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="{{('/')}}deskapp/src/plugins/datatables/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="{{('/')}}deskapp/src/plugins/jquery-steps/jquery.steps.css">
+@endsection
 @section('content')
 <div class="min-height-200px">
     <div class="page-header">
@@ -25,17 +30,17 @@
     
     <div class="pd-20 card-box mb-30">
         <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
+        <table class="data-table table stripe hover nowrap">
+                <thead class="text-center">
                     <tr align="center">
-                        <th scope="col">No.</th>
-                        <th scope="col">Nama Peminjam</th>
-                        <th scope="col">Barang</th>
-                        <th scope="col">Jumlah</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Lama Sewa</th>
-                        <th scope="col">Tanggal Kembali</th>
-                        <th scope="col">Action</th>
+                        <th class="table-plus datatable-nosort">No.</th>
+                        <th>Nama Peminjam</th>
+                        <th>Barang</th>
+                        <th>Jumlah</th>
+                        <th>Total</th>
+                        <th>Lama Sewa</th>
+                        <th>Tanggal Kembali</th>
+                        <th class="datatable-nosort">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,6 +118,18 @@
 @endsection
 @section('script')
 <script>
+<script src="{{('/')}}deskapp/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{('/')}}deskapp/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{('/')}}deskapp/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+<script src="{{('/')}}deskapp/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+<!-- buttons for Export datatable -->
+<script src="{{('/')}}deskapp/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+<!-- Datatable Setting js -->
+<script src="{{('/')}}deskapp/vendors/scripts/datatable-setting.js"></script>
+</body>
+<!-- Step Wizard Setting -->
+<script src="{{('/')}}deskapp/src/plugins/jquery-steps/jquery.steps.js"></script>
+<script src="{{('/')}}deskapp/vendors/scripts/steps-setting.js"></script>
 function kembalikan(id,user_id,barang_id){
     id= id;
     user_id = user_id;
